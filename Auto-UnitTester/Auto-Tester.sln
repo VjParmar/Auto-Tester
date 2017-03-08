@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auto-UnitTester", "Auto-UnitTester\Auto-UnitTester.csproj", "{E573B2CC-3283-43B9-88B1-23AA91406E33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auto-Tester", "Auto-UnitTester\Auto-Tester.csproj", "{E573B2CC-3283-43B9-88B1-23AA91406E33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auto-UnitTester.UnitTest", "Auto-UnitTester.UnitTest\Auto-UnitTester.UnitTest.csproj", "{03B2EF69-5BC2-42BD-BC02-362E623B1353}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auto-Tester.UnitTest", "Auto-UnitTester.UnitTest\Auto-Tester.UnitTest.csproj", "{03B2EF69-5BC2-42BD-BC02-362E623B1353}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
