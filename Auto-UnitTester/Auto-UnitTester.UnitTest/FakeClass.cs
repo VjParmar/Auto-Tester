@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Auto_UnitTester.UnitTest
+namespace Auto_Tester.UnitTest
 {
     class FakeClass
     {

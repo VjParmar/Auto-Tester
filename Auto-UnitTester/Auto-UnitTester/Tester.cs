@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Auto_UnitTester
+namespace Auto_Tester
 {
     public static class Tester
     {

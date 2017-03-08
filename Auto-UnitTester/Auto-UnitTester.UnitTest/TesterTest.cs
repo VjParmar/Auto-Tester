@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace Auto_UnitTester.UnitTest
+namespace Auto_Tester.UnitTest
 {
     [TestFixture()]
     public class TesterTest
