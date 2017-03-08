@@ -52,7 +52,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Auto-UnitTester\Auto-Tester.csproj">
+    <ProjectReference Include="..\Auto-Tester\Auto-Tester.csproj">
       <Project>{e573b2cc-3283-43b9-88b1-23aa91406e33}</Project>
       <Name>Auto-Tester</Name>
     </ProjectReference>
