@@ -7,8 +7,8 @@
     <ProjectGuid>{E573B2CC-3283-43B9-88B1-23AA91406E33}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Auto_UnitTester</RootNamespace>
-    <AssemblyName>Auto-UnitTester</AssemblyName>
+    <RootNamespace>Auto_Tester</RootNamespace>
+    <AssemblyName>Auto-Tester</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
