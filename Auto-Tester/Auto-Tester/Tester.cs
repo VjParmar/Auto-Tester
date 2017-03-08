@@ -33,8 +33,15 @@ namespace Auto_Tester
             {
                 foreach (DictionaryEntry item in StringDictionary)
                 {
-                    object[] parametersArray = { item.Value };
-                    methodInfo.Invoke(classInstance, parametersArray);
+                    try
+                    {
+                        object[] parametersArray = {item.Value};
+                        methodInfo.Invoke(classInstance, parametersArray);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw  new Exception($"Error occured while calling  {Environment.NewLine} Class - {type.Name} {Environment.NewLine} Method - {methodInfo}  {Environment.NewLine} Parameter value - {item.Value}",ex);
+                    }
                 }
             }
 
