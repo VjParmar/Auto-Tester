@@ -8,7 +8,6 @@ namespace Auto_Tester.UnitTest
         [Test]
         public void ProvidedValues_Call_All_FakeFunction()
         {
-            Tester.LoadDictinaries
             Tester.Test(typeof(FakeClass));
             Assert.True(true);
         }
