@@ -63,7 +63,14 @@ namespace Auto_Tester
         private static void InvokeMethod(object classInstance, MethodInfo methodInfo, ParameterInfo parameter)
         {
             object[] parametersArray = { };
-            var dictionary = GetDictionaryForParamterType(parameter.ParameterType.Name);
+            var type = parameter.ParameterType;
+            var paramname = parameter.ParameterType.Name;
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                var underlyingType = Nullable.GetUnderlyingType(type);
+                if (underlyingType != null) paramname = underlyingType.Name;
+            }
+            var dictionary = GetDictionaryForParamterType(paramname);
             if (dictionary == null)
             {
                 InvokeMethodWithDefaultValues(classInstance, methodInfo, parameter, parametersArray);
