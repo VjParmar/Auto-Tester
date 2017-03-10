@@ -20,7 +20,11 @@ namespace Auto_Tester
         {
             DictionaryListOfAllItemTypes = new Dictionary<string, Dictionary<string, object>>();
             _defaultParametersarray = new ArrayList();
-            var dictionaryLoaderList = new List<DictionaryLoader> {new StringDictionaryLoader()};
+            var dictionaryLoaderList = new List<DictionaryLoader>
+            {
+                new StringDictionaryLoader(),
+                new Int32DictionaryLoader()
+            };
             LoadDefaultDictinaries(dictionaryLoaderList);
         }
 
@@ -87,7 +91,7 @@ namespace Auto_Tester
             {
                 try
                 {
-                    parametersArray = GetParameterValueForMethod(dictionary, i + 1, parameter.Position);
+                    parametersArray = GetParameterValueForMethod(dictionary, i + 1, parameter);
                     methodInfo.Invoke(classInstance, parametersArray);
                 }
                 catch (Exception ex)
@@ -114,20 +118,41 @@ namespace Auto_Tester
         private static void ThrowException(object classInstance, MethodInfo methodInfo, ParameterInfo parameter,
             object[] parametersArray, Exception ex)
         {
-            var paramvalue = parametersArray[parameter.Position] ?? "null";
+            var paramvalue = "";
+            if (parametersArray.Length > 0 && parametersArray[parameter.Position] != null)
+            {
+                paramvalue = parametersArray[parameter.Position].ToString();
+            }
+
             throw new Exception(
                 $"Error occured while calling  {Environment.NewLine} Class - {classInstance.GetType().Name} {Environment.NewLine} " +
                 $"Method - {methodInfo}  {Environment.NewLine} Parameter value - {paramvalue}",
                 ex);
         }
 
-        private static object[] GetParameterValueForMethod(Dictionary<string, object> dictionary, int i, int parameterPosition)
+        private static object[] GetParameterValueForMethod(Dictionary<string, object> dictionary, int i, ParameterInfo parameterInfo)
         {
             object item;
             var paramarray = _defaultParametersarray.ToArray();
             if (dictionary.TryGetValue(i.ToString(), out item))
             {
-                paramarray[parameterPosition] = item;
+                try
+                {
+                    var paramType = parameterInfo.ParameterType;
+
+                    if (paramType.IsGenericType && paramType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    {
+                        paramarray[parameterInfo.Position] = Convert.ChangeType(item, paramType.GetGenericArguments()[0]);
+                    }
+                    else
+                    {
+                        paramarray[parameterInfo.Position] = Convert.ChangeType(item, paramType);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    paramarray[parameterInfo.Position] = null;
+                }
             }
             return paramarray;
         }
