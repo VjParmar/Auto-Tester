@@ -13,5 +13,17 @@ namespace Auto_Tester.UnitTest
             var substring = value.Substring('-');
             Console.WriteLine(substring);
         }
+        public void FakeFunctionWithIntNullable(int? value)
+        {
+            var number = value.Value;
+            var result = number / 0;
+            Console.WriteLine(result);
+        }
+        public void FakeFunctionWithObject(object value)
+        {
+            var result = (FakeClass) value;
+            result.FakeFunction();
+            Console.WriteLine("Function called");
+        }
     }
 }
