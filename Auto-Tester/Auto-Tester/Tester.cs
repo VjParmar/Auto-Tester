@@ -138,6 +138,12 @@ namespace Auto_Tester
             {
                 try
                 {
+                    if (item == null)
+                    {
+                        paramarray[parameterInfo.Position] = null;
+                        return paramarray;
+                    }
+
                     var paramType = parameterInfo.ParameterType;
 
                     if (paramType.IsGenericType && paramType.GetGenericTypeDefinition() == typeof(Nullable<>))

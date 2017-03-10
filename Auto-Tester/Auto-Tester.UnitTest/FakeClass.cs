@@ -18,7 +18,7 @@ namespace Auto_Tester.UnitTest
             if (value != null)
             {
                 var number = value.Value;
-                var result = number / 0;
+                var result = number / 1;
                 Console.WriteLine(result);
             }
         }
