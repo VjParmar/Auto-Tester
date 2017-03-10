@@ -1,11 +1,17 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Auto_Tester.UnitTest
 {
     [TestFixture()]
     public class TesterTest
     {
+        [Test]
+        public void ProvidedValues_Call_All_FakeFunction()
+        {
+            Tester.Test(typeof(FakeClass));
+            Assert.True(true);
+        }
+
         [Test]
         public void ProvidedValues_Call_FakeFunctionFunction()
         {

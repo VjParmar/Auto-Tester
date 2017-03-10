@@ -9,6 +9,11 @@ namespace Auto_Tester
 {
     public static class Tester
     {
+        private static BindingFlags bindingflag =
+            BindingFlags.Default | BindingFlags.IgnoreCase | BindingFlags.Instance |
+            BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy | BindingFlags.InvokeMethod |
+            BindingFlags.CreateInstance | BindingFlags.NonPublic;
+
         public static Dictionary<string, Dictionary<string, object>> DictionaryListOfAllItemTypes = new Dictionary<string, Dictionary<string, object>>();
         private static ArrayList _defaultParametersarray;
         static Tester()
@@ -122,7 +127,7 @@ namespace Auto_Tester
             if (type == null) throw new Exception("Type cannot be null");
             if (string.IsNullOrEmpty(methodName)) throw new Exception("Method name cannot be empty");
 
-            MethodInfo methodInfo = type.GetMethod(methodName);
+            MethodInfo methodInfo = type.GetMethod(methodName, bindingflag);
             if (methodInfo == null) throw new Exception("Method not available in provided type");
             return methodInfo;
         }
@@ -148,6 +153,15 @@ namespace Auto_Tester
             }
             //Resources.StringDictionary; ;
             return stringDict;
+        }
+
+        public static void Test(Type type)
+        {
+            MethodInfo[] methodInfoArray = type.GetMethods(bindingflag);
+            foreach (var methodInfo in methodInfoArray)
+            {
+                Test(type, methodInfo.Name);
+            }
         }
     }
 }
