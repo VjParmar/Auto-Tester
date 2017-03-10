@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using Auto_Tester.Properties;
+using Auto_Tester.Dictionaries;
 
 namespace Auto_Tester
 {
@@ -14,12 +13,23 @@ namespace Auto_Tester
             BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy | BindingFlags.InvokeMethod |
             BindingFlags.CreateInstance | BindingFlags.NonPublic;
 
-        public static Dictionary<string, Dictionary<string, object>> DictionaryListOfAllItemTypes = new Dictionary<string, Dictionary<string, object>>();
+        public static Dictionary<string, Dictionary<string, object>> DictionaryListOfAllItemTypes;
         private static ArrayList _defaultParametersarray;
+
         static Tester()
         {
-            DictionaryListOfAllItemTypes.Add("String", LoadStringDictionaryData());
+            DictionaryListOfAllItemTypes = new Dictionary<string, Dictionary<string, object>>();
             _defaultParametersarray = new ArrayList();
+            var dictionaryLoaderList = new List<DictionaryLoader> {new StringDictionaryLoader()};
+            LoadDefaultDictinaries(dictionaryLoaderList);
+        }
+
+        private static void LoadDefaultDictinaries(List<DictionaryLoader> dictionaryLoaderList)
+        {
+            foreach (var dictionaryLoader in dictionaryLoaderList)
+            {
+                DictionaryListOfAllItemTypes.Add(dictionaryLoader.DictionaryName, dictionaryLoader.LoadDictionaryData());
+            }
         }
 
         public static bool Test(Type type, string methodName)
@@ -132,29 +142,6 @@ namespace Auto_Tester
             return methodInfo;
         }
 
-        private static Dictionary<string, object> LoadStringDictionaryData()
-        {
-            List<string> words = Resources.StringDictionary.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
-            var stringDict = new Dictionary<string, object>();
-            foreach (var word in words)
-            {
-                var strings = word.Split('-');
-                var key = strings[0];
-                var arr = strings.Skip(1).ToArray();
-                var value = string.Join("-", arr);
-                if (value.ToLower() == "null")
-                {
-                    stringDict.Add(key, null);
-                }
-                else
-                {
-                    stringDict.Add(key, value);
-                }
-            }
-            //Resources.StringDictionary; ;
-            return stringDict;
-        }
-
         public static void Test(Type type)
         {
             MethodInfo[] methodInfoArray = type.GetMethods(bindingflag);
@@ -163,30 +150,5 @@ namespace Auto_Tester
                 Test(type, methodInfo.Name);
             }
         }
-    }
-}
-
-
-public class DefaultGenerator
-{
-    public static object GetDefaultValue(Type parameter)
-    {
-        var defaultGeneratorType =
-          typeof(DefaultGenerator<>).MakeGenericType(parameter);
-
-        return defaultGeneratorType.InvokeMember(
-          "GetDefault",
-          BindingFlags.Static |
-          BindingFlags.Public |
-          BindingFlags.InvokeMethod,
-          null, null, new object[0]);
-    }
-}
-
-public class DefaultGenerator<T>
-{
-    public static T GetDefault()
-    {
-        return default(T);
     }
 }
