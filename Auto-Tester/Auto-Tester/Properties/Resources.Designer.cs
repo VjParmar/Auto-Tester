@@ -63,8 +63,22 @@ namespace Auto_Tester.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 1-null
         ///2-
+        ///3-0
+        ///4-99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+        ///5--99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+        ///.
+        /// </summary>
+        internal static string Int32Dictionary {
+            get {
+                return ResourceManager.GetString("Int32Dictionary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1-null
+        ///2-
         ///3-a
-        ///4-hajshfdjjadfkjahsfdhahsdjhahsdfhjkhasdhfkjhakjsdhfkjhsdkjfkjsdkjfsdjfjsdfjhsjdfhjhddddddddddddddddffffjhwiuerewhjfhjahdsjkhfjkahsjdhfjhjksdfhajshfdjjadfkjahsfdhahsdjhahsdfhjkhasdhfkjhakjsdhfkjhsdkjfkjsdkjfsdjfjsdfjhsjdfhjhddddddddddddddddffffjhwiuerewhjfhjahdsjkhfjkahsjdhfjhjksdfhajshfdjjadfkjahsfdhahsdjhahsdfhjkhasdhfkjhakjsdhfkjhsdkjfkjsdkjfsdjfjsdfjhsjdfhjhddddddddddddddddffffjhwiuerewhjfhjahdsjkhfjkahsjdhfjhjksdfhajshfdjjadfkjahsfdhahsdjhahsdfhjkhasdhfkjhakjsdhfkjhsdkjfkjsdkjfsdjfjsdf [rest of string was truncated]&quot;;.
+        ///4-asdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuio [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StringDictionary {
             get {

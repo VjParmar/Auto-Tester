@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dictionaries\DictionaryLoader.cs" />
+    <Compile Include="Dictionaries\Int32DictionaryLoader.cs" />
     <Compile Include="Dictionaries\StringDictionaryLoader.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -52,7 +53,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="StringDictionary.txt" />
+    <Content Include="Dictionary\Int32Dictionary.txt" />
+    <Content Include="Dictionary\StringDictionary.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
