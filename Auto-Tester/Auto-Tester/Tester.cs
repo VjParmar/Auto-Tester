@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 using Auto_Tester.Dictionaries;
 
@@ -138,22 +139,9 @@ namespace Auto_Tester
             {
                 try
                 {
-                    if (item == null)
-                    {
-                        paramarray[parameterInfo.Position] = null;
-                        return paramarray;
-                    }
-
-                    var paramType = parameterInfo.ParameterType;
-
-                    if (paramType.IsGenericType && paramType.GetGenericTypeDefinition() == typeof(Nullable<>))
-                    {
-                        paramarray[parameterInfo.Position] = Convert.ChangeType(item, paramType.GetGenericArguments()[0]);
-                    }
-                    else
-                    {
-                        paramarray[parameterInfo.Position] = Convert.ChangeType(item, paramType);
-                    }
+                    dynamic value;
+                    TryConvertValue(parameterInfo.ParameterType, item.ToString(), out value);
+                    paramarray[parameterInfo.Position] = value;
                 }
                 catch (Exception ex)
                 {
@@ -187,6 +175,47 @@ namespace Auto_Tester
             {
                 Test(type, methodInfo.Name);
             }
+        }
+        
+        //Try Parse using Reflection
+        public static bool TryConvertValue(Type targetType, string stringValue, out object convertedValue)
+        {
+
+            if (targetType == typeof(string))
+            {
+                convertedValue = Convert.ChangeType(stringValue, typeof(object));
+                return true;
+            }
+            var nullableType = targetType.IsGenericType &&
+                           targetType.GetGenericTypeDefinition() == typeof(Nullable<>);
+            if (nullableType)
+            {
+                if (string.IsNullOrEmpty(stringValue))
+                {
+                    convertedValue = default(object);
+                    return true;
+                }
+                targetType = new NullableConverter(targetType).UnderlyingType;
+            }
+
+            Type[] argTypes = { typeof(string), targetType.MakeByRefType() };
+            var tryParseMethodInfo = targetType.GetMethod("TryParse", argTypes);
+            if (tryParseMethodInfo == null)
+            {
+                convertedValue = default(object);
+                return false;
+            }
+
+            object[] args = { stringValue, null };
+            var successfulParse = (bool)tryParseMethodInfo.Invoke(null, args);
+            if (!successfulParse)
+            {
+                convertedValue = default(object);
+                return false;
+            }
+
+            convertedValue = args[1];
+            return true;
         }
     }
 }
