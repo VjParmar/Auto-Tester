@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FakeClass.cs" />
+    <Compile Include="FakeModel.cs" />
     <Compile Include="TesterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
